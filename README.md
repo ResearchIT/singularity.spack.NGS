@@ -1,8 +1,8 @@
 # singularity.spack.NGS
 
-Pack SPACK modules into a singularity container using SPACK virtual Env in 3 steps\
+Pack SPACK modules into a singularity container using SPACK virtual Env in 3 steps
 
-1. Build a cento7.6 base container with SPACK installed\
+1. Build a CentOS7.6 base container with SPACK installed\
 Download the singularity script singularity.spack.base to your current working directory:\
 $ sudo singularity build -s centos7-spack.sandbox ./singularity.spack.base
 
