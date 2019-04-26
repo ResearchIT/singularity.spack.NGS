@@ -13,3 +13,9 @@ $ sudo singularity shell -w -B $PWD:/mnt centos-spack.sandbox /mnt/singularity_s
 3. Convert the singularity sandbox to an image\
 $ sudo singularity build canu1.8.simg centos-spack.sandbox\
 $ sudo rm -rf ./centos-spack.sandbox
+
+To list the installed and loaded modules in the container canu1.8.simg\
+$ singularity run canu1.8.simg
+
+To run installed modules like canu in the container canu1.8.simg\
+$ singularity exec canu1.8.simg canu --help
