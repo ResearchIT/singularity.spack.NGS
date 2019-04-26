@@ -54,5 +54,5 @@ EOT
 
 
 %runscript
-spack help
+spack find
 
