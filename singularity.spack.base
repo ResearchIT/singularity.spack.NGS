@@ -22,8 +22,8 @@ yum -y install git curl wget \
 gcc gcc-c++ gcc-gfortran python\
 gnupg2 sed patch \
 unzip gzip bzip2 \
-findutils make vim \
-environment-modules
+environment-modules \
+findutils make vim file
 
 yum -y update
 yum clean all
@@ -33,8 +33,8 @@ export SPACK_ROOT=/opt/spack
 git clone https://github.com/spack/spack.git $SPACK_ROOT
 
 export PATH=$SPACK_ROOT/bin:$PATH
-source $SPACK_ROOT/share/spack/setup-env.sh
 source /etc/profile.d/modules.sh
+source $SPACK_ROOT/share/spack/setup-env.sh
 
 #setup compilers.yaml for gcc@4.8.5 installed by yum	
 spack compiler find --scope site
@@ -46,12 +46,7 @@ modules:
     hash_length: 0
     all:
       autoload: 'direct'
-      suffixes:
-        ^python@2: 'py2'
-        ^python@3: 'py3'
-
 EOT
-
 
 %runscript
 spack find

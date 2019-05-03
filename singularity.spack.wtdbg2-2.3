@@ -1,0 +1,22 @@
+Bootstrap: localimage
+From: ./spack.base.simg
+
+%post 
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+export FORCE_UNSAFE_CONFIGURE=1
+spack env create wtdbg2 
+spack env activate wtdbg2
+spack -e wtdbg2 add wtdbg2@2.3
+spack install
+spack load wtdbg2
+
+%environment
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+spack load wtdbg2
+
+%runscript
+wtdbg2 "$@"

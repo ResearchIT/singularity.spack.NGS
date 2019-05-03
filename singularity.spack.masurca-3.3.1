@@ -1,0 +1,22 @@
+Bootstrap: localimage
+From: ./spack.base.simg
+
+%post 
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+export FORCE_UNSAFE_CONFIGURE=1
+spack env create masurca 
+spack env activate masurca
+spack -e masurca add masurca@3.3.1
+spack install
+spack load masurca
+
+%environment
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+spack load masurca
+
+%runscript
+masurca.py "$@"

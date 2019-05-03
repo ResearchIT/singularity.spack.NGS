@@ -1,0 +1,25 @@
+Bootstrap: localimage
+From: ./spack.base.simg
+
+%post 
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+export FORCE_UNSAFE_CONFIGURE=1
+spack env create spades 
+spack env activate spades
+spack -e spades add gcc@7.4.0
+spack install
+spack compiler find $(spack location -i gcc@7.4.0)
+spack -e spades add spades@3.13.0 %gcc@7.4.0
+spack install
+spack load spades
+
+%environment
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+spack load spades
+
+%runscript
+spades "$@"
