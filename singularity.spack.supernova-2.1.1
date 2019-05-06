@@ -1,0 +1,30 @@
+Bootstrap: localimage
+From: ./spack.base.simg
+
+%files
+# download your own copy of supernova
+supernova-2.1.1.tar.gz
+
+%post 
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+export FORCE_UNSAFE_CONFIGURE=1
+spack env create supernova 
+spack env activate supernova
+
+spack -e supernova add libxml2@2.7.8
+spack -e supernova add libxslt@1.1.26  ^libxml2@2.7.8
+spack -e supernova add bcl2fastq2@2.20.0.422 ^boost@1.54.0  ^libxml2@2.7.8 ^libxslt@1.1.26
+spack -e supernova add supernova@2.1.1 ^bcl2fastq2@2.20.0.422 ^boost@1.54.0 ^libxml2@2.7.8 ^libxslt@1.1.26
+spack install
+spack load supernova
+
+%environment
+export PATH=/opt/spack/bin/:$PATH
+source /etc/profile.d/modules.sh
+source /opt/spack/share/spack/setup-env.sh
+spack load supernova
+
+%runscript
+supernova "$@"
